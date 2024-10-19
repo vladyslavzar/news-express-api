@@ -11,6 +11,7 @@ const _apiKey = '86093b2ae8ab4a84b5957f0c566ab1f3';
 app.use(cors());
 
 
+
 // all get requests
 
 router.get('/', (req,res) => {
@@ -23,25 +24,57 @@ router.get('/', (req,res) => {
 
 
 router.get('/cors/getHotTopic', (req, res) => {
-    request(`https://newsapi.org/v2/top-headlines?language=en&apiKey=${_apiKey}`, function(error, response, body) {
+    const userAgent = req.get('user-agent');
+    const options = {
+        host: 'newsapi.org',
+        url: `https://newsapi.org/v2/top-headlines?language=en&apiKey=${_apiKey}`,
+        headers: {
+        'User-Agent': userAgent
+        }
+    }
+    request(options, function(error, response, body) {
         res.send(body);
     }) 
 })
 
 router.get('/cors/getTopicsInCategory/category/:category/page/:page', (req, res) => {
-    request(`https://newsapi.org/v2/top-headlines?language=en&category=${req.params.category}&page=${req.params.page}&apiKey=${_apiKey}`, function(error, response, body) {
+    const userAgent = req.get('user-agent');
+    const options = {
+        host: 'newsapi.org',
+        url: `https://newsapi.org/v2/top-headlines?language=en&category=${req.params.category}&page=${req.params.page}&apiKey=${_apiKey}`,
+        headers: {
+        'User-Agent': userAgent
+        }
+    }
+    request(options, function(error, response, body) {
         res.send(body);
     }) 
 })
 
 router.get('/cors/getTopicsBySearch/request/:request/page/:page', (req, res) => {
-    request(`https://newsapi.org/v2/everything?q=${req.params.request}&page=${req.params.page}&sortBy=publishedAt&apiKey=${_apiKey}`, function(error, response, body) {
+    const userAgent = req.get('user-agent');
+    const options = {
+        host: 'newsapi.org',
+        url: `https://newsapi.org/v2/everything?q=${req.params.request}&page=${req.params.page}&sortBy=publishedAt&apiKey=${_apiKey}`,
+        headers: {
+        'User-Agent': userAgent
+        }
+    }
+    request(options, function(error, response, body) {
         res.send(body);
     }) 
 })
 
 router.get('/cors/getTopicByTitle/request/:request/page/:page', (req, res) => {
-    request(`https://newsapi.org/v2/everything?q=${req.params.request}&page=${req.params.page}&searchIn=title&sortBy=publishedAt&apiKey=${_apiKey}`, function(error, response, body) {
+    const userAgent = req.get('user-agent');
+    const options = {
+        host: 'newsapi.org',
+        url: `https://newsapi.org/v2/everything?q=${req.params.request}&page=${req.params.page}&searchIn=title&sortBy=publishedAt&apiKey=${_apiKey}`,
+        headers: {
+        'User-Agent': userAgent
+        }
+    }
+    request(options, function(error, response, body) {
         res.send(body);
     }) 
 })
